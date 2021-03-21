@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import {
   Container,
   LoginButton,
@@ -18,9 +19,12 @@ const Header: React.FC = () => {
         <LoginButton>
           <LoginButtonText>Login</LoginButtonText>
         </LoginButton>
-        <SignInButton>
-          <SignInButtonText>Cadastro</SignInButtonText>
-        </SignInButton>
+
+        <Link to="/signup">
+          <SignInButton>
+            <SignInButtonText>Cadastro</SignInButtonText>
+          </SignInButton>
+        </Link>
       </ButtonBox>
     </Container>
   );

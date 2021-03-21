@@ -1,12 +1,13 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Main from '../pages/Main';
-import Route from './Route';
+import SignUp from '../pages/Signup';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Main} />
+    <Route path="/signup" component={SignUp} />
   </Switch>
 );
 
