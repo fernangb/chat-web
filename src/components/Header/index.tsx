@@ -16,9 +16,11 @@ const Header: React.FC = () => {
     <Container>
       <ChatBox />
       <ButtonBox>
-        <LoginButton>
-          <LoginButtonText>Login</LoginButtonText>
-        </LoginButton>
+        <Link to="signin">
+          <LoginButton>
+            <LoginButtonText>Login</LoginButtonText>
+          </LoginButton>
+        </Link>
 
         <Link to="/signup">
           <SignInButton>
