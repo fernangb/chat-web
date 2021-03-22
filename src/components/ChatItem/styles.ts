@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   opacity: 0.6;
-  background-color: #958fa3;
+  background-color: #f7f7f7;
   padding: 8px;
   margin: 8px;
 
@@ -29,8 +29,6 @@ export const ChatListenerNumber = styled.p`
 `;
 
 export const JoinButton = styled.button`
-  background: #00f;
-
   border-radius: 10px;
   border: 0;
   width: 64px;
@@ -45,5 +43,4 @@ export const JoinButton = styled.button`
 
 export const ButtonText = styled.p`
   font-size: 16px;
-  /* color: #fff; */
 `;

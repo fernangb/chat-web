@@ -1,4 +1,6 @@
-import React, { useCallback, useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-plusplus */
+import React, { useCallback, useRef, useState } from 'react';
 import {
   FiArrowLeft,
   FiMail,
@@ -8,43 +10,70 @@ import {
 } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
-import { Container, Content } from './styles';
+import { Container, Content, FieldContent, Title, ErrorField } from './styles';
+import api from '../../services/api';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import InputDate from '../../components/InputDate';
 
 interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  bornDate: Date;
 }
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [bornDateError, setBornDateError] = useState(false);
+  const [nameErrorText, setNameErrorText] = useState('');
+  const [emailErrorText, setEmailErrorText] = useState('');
+  const [passwordErrorText, setPasswordErrorText] = useState('');
+  const [bornDateErrorText, setBornDateErrorText] = useState('');
+
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
-      formRef.current?.setErrors({});
+      setNameError(false);
+      setEmailError(false);
+      setPasswordError(false);
+      setBornDateError(false);
+      let errors = 0;
 
-      try {
-        const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'),
-          email: Yup.string()
-            .required('Email obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().min(6, 'Mínimo de 6 caracteres'),
-        });
+      console.log(data);
 
-        await schema.validate(data, {
-          abortEarly: false,
-        });
+      if (!data.name) {
+        setNameErrorText('Nome obrigatório');
+        setNameError(true);
+        errors++;
+      }
 
+      if (!data.email) {
+        setEmailErrorText('Email obrigatório');
+        setEmailError(true);
+        errors++;
+      }
+
+      if (!data.password) {
+        setPasswordErrorText('Senha obrigatória');
+        setPasswordError(true);
+        errors++;
+      }
+
+      if (!data.bornDate) {
+        setBornDateErrorText('Data de nascimento obrigatória');
+        setBornDateError(true);
+        errors++;
+      }
+
+      if (errors === 0) {
+        const response = await api.post('/users', data);
+        console.log(response);
         history.push('/');
-      } catch (err) {
-        console.log(err);
       }
     },
     [history],
@@ -55,15 +84,41 @@ const SignUp: React.FC = () => {
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Faça seu cadastro</h1>
-          <Input name="name" icon={FiUser} placeholder="Nome" />
-          <Input name="email" icon={FiMail} placeholder="E-mail" />
-          <Input
-            name="password"
-            icon={FiLock}
-            type="password"
-            placeholder="Senha"
-          />
-          <InputDate name="email" icon={FiCalendar} placeholder="E-mail" />
+          <FieldContent>
+            <Title>Nome Completo</Title>
+            <Input isErrored={nameError} name="name" icon={FiUser} />
+            <ErrorField isErrored={nameError}>{nameErrorText}</ErrorField>
+          </FieldContent>
+          <FieldContent>
+            <Title>E-mail</Title>
+            <Input isErrored={emailError} name="email" icon={FiMail} />
+            <ErrorField isErrored={emailError}>{emailErrorText}</ErrorField>
+          </FieldContent>
+          <FieldContent>
+            <Title>Senha</Title>
+            <Input
+              isErrored={passwordError}
+              name="password"
+              icon={FiLock}
+              type="password"
+            />
+            <ErrorField isErrored={passwordError}>
+              {passwordErrorText}
+            </ErrorField>
+          </FieldContent>
+          <FieldContent>
+            <Title>Data de Nascimento</Title>
+            <Input
+              type="date"
+              isErrored={bornDateError}
+              name="bornDate"
+              icon={FiCalendar}
+            />
+            <ErrorField isErrored={bornDateError}>
+              {bornDateErrorText}
+            </ErrorField>
+          </FieldContent>
+
           <Button type="submit">Cadastrar</Button>
         </Form>
         <Link to="/">

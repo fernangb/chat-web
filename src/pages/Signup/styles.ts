@@ -1,5 +1,8 @@
-import styled, { keyframes } from 'styled-components';
-import { shade } from 'polished';
+import styled, { css } from 'styled-components';
+
+interface ErrorProps {
+  isErrored: boolean;
+}
 
 export const Container = styled.div`
   height: 100vh;
@@ -15,58 +18,29 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  h1 {
+    margin: 64px;
+    color: #1c76bb;
+  }
 `;
 
-// const appearFromRight = keyframes`
-//   from {
-//     opacity: 0;
-//     transform: translateX(50px);
-//   }
-//   to{
-//     opacity: 1;
-//     transform: translateX(0);
-//   }
-// `;
+export const Title = styled.h3`
+  margin-left: 16px;
+  margin-bottom: 8px;
+  color: #1c76bb;
+`;
 
-export const AnimationContainer = styled.div`
+export const FieldContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  form {
-    margin: 80px 0;
-    width: 340px;
-    text-align: center;
-    h1 {
-      margin-bottom: 24px;
-    }
-    a {
-      color: #f4ede8;
-      display: block;
-      margin-top: 10px;
-      text-decoration: none;
-      &:hover {
-        color: ${shade(0.2, '#f4ede8')};
-      }
-    }
-  }
-  > a {
-    color: #ff9000;
-    display: block;
-    margin-top: 10px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    svg {
-      margin-right: 16px;
-    }
-    &:hover {
-      color: ${shade(0.2, '#ff9000')};
-    }
-  }
+  margin-top: 8px;
 `;
 
-export const Background = styled.div`
-  flex: 1;
-  background-size: cover;
+export const ErrorField = styled.div<ErrorProps>`
+  ${props =>
+    props.isErrored &&
+    css`
+      color: #c53030;
+    `}
 `;

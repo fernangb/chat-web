@@ -8,22 +8,21 @@ export const Container = styled.div`
   justify-content: center;
   padding: 8px;
   border-bottom: 1px solid;
-  border-color: #fff;
+  border-color: #1c76bb;
 `;
 
 export const ChatBox = styled.div`
-  width: 75%;
+  width: 70%;
 `;
 
 export const ButtonBox = styled.div`
-  width: 25%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: space-around;
 `;
 
 export const LoginButton = styled.button`
-  background: #0ff;
   border-radius: 10px;
   border: 0;
   width: 64px;
@@ -39,7 +38,6 @@ export const LoginButton = styled.button`
 export const LoginButtonText = styled.p``;
 
 export const SignInButton = styled.button`
-  background: #00f;
   border-radius: 10px;
   border: 0;
   width: 72px;
