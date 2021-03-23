@@ -5,6 +5,7 @@ import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { Link, useHistory } from 'react-router-dom';
+import Modal from 'react-modal';
 import { Container, Content, FieldContent, Title, ErrorField } from './styles';
 import api from '../../services/api';
 import Input from '../../components/Input';
@@ -16,6 +17,17 @@ interface SignUpFormData {
   password: string;
 }
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
@@ -26,21 +38,22 @@ const SignIn: React.FC = () => {
   const [emailErrorText, setEmailErrorText] = useState('');
   const [passwordErrorText, setPasswordErrorText] = useState('');
 
+  const [isErrored, setIsErrored] = useState(false);
+  const [errorText, setErrorText] = useState('');
+
   const handleSubmit = useCallback(
-    async (data: SignUpFormData) => {
+    async ({ email, password }: SignUpFormData) => {
       setEmailError(false);
       setPasswordError(false);
       let errors = 0;
 
-      console.log(data);
-
-      if (!data.email) {
+      if (!email) {
         setEmailErrorText('Email obrigatório');
         setEmailError(true);
         errors++;
       }
 
-      if (!data.password) {
+      if (!password) {
         setPasswordErrorText('Senha obrigatória');
         setPasswordError(true);
         errors++;
@@ -48,15 +61,26 @@ const SignIn: React.FC = () => {
 
       if (errors === 0) {
         await signIn({
-          email: data.email,
-          password: data.password,
-        });
+          email,
+          password,
+        })
+          .then(response => {
+            history.push('/dashboard');
+          })
+          .catch(err => {
+            const { data } = err.response;
 
-        history.push('/dashboard');
+            setIsErrored(true);
+            setErrorText(data.error);
+          });
       }
     },
-    [history],
+    [history, signIn],
   );
+
+  function closeModal() {
+    setIsErrored(false);
+  }
 
   return (
     <Container>
@@ -87,6 +111,13 @@ const SignIn: React.FC = () => {
           Criar conta
         </Link>
       </Content>
+      <Modal
+        isOpen={isErrored}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <div>{errorText}</div>
+      </Modal>
     </Container>
   );
 };

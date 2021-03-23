@@ -8,15 +8,20 @@ interface SignInCredentials {
   password: string;
 }
 
+interface IUser {
+  name: string;
+  email: string;
+}
+
 interface AuthContextData {
-  user: object;
+  user: IUser;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): Promise<void>;
 }
 
 interface AuthState {
   token: string;
-  user: object;
+  user: IUser;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -33,9 +38,6 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
   const signIn = useCallback(async ({ email, password }) => {
-    console.log('email: ', email);
-    console.log('password: ', password);
-    console.log('oi: ');
     const response = await api.post('sessions', { email, password });
 
     const { token, user } = response.data;
