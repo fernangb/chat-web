@@ -33,6 +33,9 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
   const signIn = useCallback(async ({ email, password }) => {
+    console.log('email: ', email);
+    console.log('password: ', password);
+    console.log('oi: ');
     const response = await api.post('sessions', { email, password });
 
     const { token, user } = response.data;
