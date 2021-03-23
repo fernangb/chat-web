@@ -7,11 +7,20 @@ export const Container = styled.div`
   margin-top: 32px;
 `;
 
+export const ChatTitle = styled.h2`
+  margin-left: 8px;
+  margin-bottom: 8px;
+`;
+
 export const ChatTableHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 65%;
-  margin: 8px;
+  margin-left: 20px;
+
+  ul {
+    color: #1c76bb;
+  }
 `;

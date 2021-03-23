@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import React, { useCallback } from 'react';
 import ChatList from '../../components/ChatList';
-import Header from '../../components/Header';
 import { useAuth } from '../../hooks/auth';
 import {
   Container,
@@ -11,6 +10,9 @@ import {
   DashboardBox,
   UserName,
   ButtonBox,
+  CreateChatButton,
+  CreateChatButtonText,
+  ChatBox,
 } from './styles';
 
 const Dashboard: React.FC = () => {
@@ -32,6 +34,11 @@ const Dashboard: React.FC = () => {
           </LogoutButton>
         </ButtonBox>
       </DashboardBox>
+      <ChatBox>
+        <CreateChatButton>
+          <CreateChatButtonText>Criar chat</CreateChatButtonText>
+        </CreateChatButton>
+      </ChatBox>
 
       <ChatList />
     </Container>

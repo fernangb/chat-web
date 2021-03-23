@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 
-import React, { useEffect } from 'react';
-import { ChatTableHeader, Container } from './styles';
+import React from 'react';
+import { ChatTableHeader, Container, ChatTitle } from './styles';
 import ChatItem from '../ChatItem';
 
 interface ChatProps {
@@ -29,17 +29,13 @@ const ChatList: React.FC = () => {
     },
   ];
 
-  useEffect(() => {
-    console.log('chats: ', chats);
-  }, []);
-
   return (
     <Container>
-      <h2>Chats Abertos</h2>
+      <ChatTitle>Chats Abertos</ChatTitle>
       <ChatTableHeader>
-        <p>Nome</p>
-        <p>Usuários</p>
-        <p>Ouvintes</p>
+        <ul>Nome</ul>
+        <ul>Usuários</ul>
+        <ul>Ouvintes</ul>
       </ChatTableHeader>
       {chats.map(chat => (
         <ChatItem chat={chat} />

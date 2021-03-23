@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { InputHTMLAttributes, useEffect } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 
 import {
   Container,
@@ -21,10 +21,6 @@ interface ChatItemProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const ChatItem: React.FC<ChatItemProps> = ({ chat, ...rest }) => {
-  useEffect(() => {
-    console.log('chat: ', chat);
-  }, []);
-
   return (
     <Container {...rest}>
       <ChatName>{chat.title}</ChatName>

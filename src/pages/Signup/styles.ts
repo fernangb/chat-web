@@ -5,10 +5,10 @@ interface ErrorProps {
 }
 
 export const Container = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 24px;
 `;
 export const Content = styled.div`
   width: 100%;
@@ -20,8 +20,9 @@ export const Content = styled.div`
   justify-content: center;
 
   h1 {
-    margin: 64px;
     color: #1c76bb;
+    margin-bottom: 24px;
+    margin-left: 48px;
   }
 `;
 
