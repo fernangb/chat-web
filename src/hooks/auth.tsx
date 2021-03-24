@@ -11,6 +11,7 @@ interface SignInCredentials {
 interface IUser {
   name: string;
   email: string;
+  id: string;
 }
 
 interface AuthContextData {

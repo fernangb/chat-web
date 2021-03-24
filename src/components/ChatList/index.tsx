@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ChatTableHeader, Container, ChatTitle } from './styles';
 import ChatItem from '../ChatItem';
 

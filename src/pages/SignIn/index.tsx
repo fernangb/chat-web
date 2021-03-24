@@ -7,7 +7,6 @@ import { FormHandles } from '@unform/core';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import { Container, Content, FieldContent, Title, ErrorField } from './styles';
-import api from '../../services/api';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
