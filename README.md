@@ -1,6 +1,6 @@
 # chat-web
 ## Sistema web para chat online
-## Teconologias:
+## Tecnologias:
 * React
 * Styled-components
 * Socket.io/client
