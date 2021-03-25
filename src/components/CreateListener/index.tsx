@@ -68,7 +68,9 @@ const CreateListener: React.FC = () => {
             <Input isErrored={false} name="chatName" icon={FiMessageCircle} />
           </FieldContent>
         </Form>
-        <CreateListenerButton>Entrar no chat</CreateListenerButton>
+        <CreateListenerButton>
+          <Link to="chat">Entrar no chat</Link>
+        </CreateListenerButton>
         <SignUpButton onClick={handleSignIn}>Login</SignUpButton>
       </Content>
     </Container>

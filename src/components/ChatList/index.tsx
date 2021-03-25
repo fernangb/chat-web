@@ -1,33 +1,28 @@
 /* eslint-disable array-callback-return */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChatTableHeader, Container, ChatTitle } from './styles';
 import ChatItem from '../ChatItem';
+import api from '../../services/api';
 
 interface ChatProps {
-  title: string;
+  name: string;
   users: number;
   listeners: number;
 }
 
 const ChatList: React.FC = () => {
-  const chats: ChatProps[] = [
-    {
-      title: 'Chat 1',
-      users: 5,
-      listeners: 5,
-    },
-    {
-      title: 'Chat 2',
-      users: 5,
-      listeners: 5,
-    },
-    {
-      title: 'Chat 3',
-      users: 5,
-      listeners: 5,
-    },
-  ];
+  const [chats, setChats] = useState<ChatProps[]>([]);
+
+  useEffect(() => {
+    async function loadData() {
+      await api.get('/chats').then(response => {
+        setChats(response.data);
+      });
+    }
+
+    loadData();
+  }, []);
 
   return (
     <Container>

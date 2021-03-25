@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { InputHTMLAttributes, useCallback, useState } from 'react';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import CreateListener from '../CreateListener';
 
@@ -14,7 +15,7 @@ import {
 } from './styles';
 
 interface ChatProps {
-  title: string;
+  name: string;
   users: number;
   listeners: number;
 }
@@ -49,7 +50,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ chat, ...rest }) => {
   if (!user) {
     return (
       <Container {...rest}>
-        <ChatName>{chat.title}</ChatName>
+        <ChatName>{chat.name}</ChatName>
         <ChatUserNumber>{chat.users}</ChatUserNumber>
         <ChatListenerNumber>{chat.listeners}</ChatListenerNumber>
         <JoinButton onClick={handleOpenModal}>
@@ -68,11 +69,13 @@ const ChatItem: React.FC<ChatItemProps> = ({ chat, ...rest }) => {
 
   return (
     <Container {...rest}>
-      <ChatName>{chat.title}</ChatName>
+      <ChatName>{chat.name}</ChatName>
       <ChatUserNumber>{chat.users}</ChatUserNumber>
       <ChatListenerNumber>{chat.listeners}</ChatListenerNumber>
-      <JoinButton onClick={handleOpenModal}>
-        <ButtonText>Entrar</ButtonText>
+      <JoinButton>
+        <Link to="/chat">
+          <ButtonText>Entrar</ButtonText>
+        </Link>
       </JoinButton>
       <Modal
         isOpen={openModal}

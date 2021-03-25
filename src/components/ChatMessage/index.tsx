@@ -27,6 +27,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log('user: ', userName);
+  }, [userName]);
+
+  useEffect(() => {
     if (!!user && user.id === userId) {
       setIsUser(true);
     } else {
